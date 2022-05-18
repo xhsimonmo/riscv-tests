@@ -17,19 +17,21 @@ instbasedir = $(UCB_VLSI_HOME)/install
 # Sources
 #--------------------------------------------------------------------
 
-bmarks = \
-	median \
-	qsort \
-	rsort \
-	towers \
-	vvadd \
-	multiply \
-	mm \
-	dhrystone \
-	spmv \
-	mt-vvadd \
-	mt-matmul \
-	pmp \
+# bmarks = \
+# 	median \
+# 	qsort \
+# 	rsort \
+# 	towers \
+# 	vvadd \
+# 	multiply \
+# 	mm \
+# 	dhrystone \
+# 	spmv \
+# 	mt-vvadd \
+# 	mt-matmul \
+# 	pmp \
+
+bmarks = litmus
 
 #--------------------------------------------------------------------
 # Build rules
