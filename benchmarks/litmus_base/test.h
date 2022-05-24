@@ -47,10 +47,4 @@ extern test_t test;
 void test_init(uint32_t*,const char*);
 void test_body(int pid);
 
-inline void delay(int n)
-{
-  for (int i = 0; i < n; i++)
-    asm volatile ("nop\n");
-}
-
 #endif

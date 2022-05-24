@@ -35,6 +35,10 @@ void test_init(uint32_t* seed, const char* allocated_ram)
     // printf("TEST INIT: randomly generated shared location: 0x%x\n", test.vars[i]);
     *test.vars[i] = 0;
   }
+
+  // for (int i = 0; i < NUM_PROCESSES; i++)
+    // printf("TEST INIT: test start time[%u]: %u\n",i, test.start_times[i]);
+
   // Set random start delays
   uint32_t max = 0;
   for (int i = 0; i < NUM_PROCESSES; i++)
@@ -46,11 +50,11 @@ void test_init(uint32_t* seed, const char* allocated_ram)
     }
 }
 
-// inline void delay(int n)
-// {
-//   for (int i = 0; i < n; i++)
-//     asm volatile ("nop\n");
-// }
+inline void delay(int n)
+{
+  for (int i = 0; i < n; i++)
+    asm volatile ("nop\n");
+}
 
-// Inlclude the automatically-generated litmus test
-// #include "testcase.c"
+// Include the automatically-generated litmus test 
+#include "testcase.c"

@@ -31,7 +31,10 @@ instbasedir = $(UCB_VLSI_HOME)/install
 # 	mt-matmul \
 # 	pmp \
 
-bmarks = litmus
+litmus_tests = \
+	2+2W+sync+po.litmus\
+	LRSC-Swap.litmus\
+	SB.litmus \
 
 #--------------------------------------------------------------------
 # Build rules
@@ -45,15 +48,24 @@ RISCV_LINK_OPTS ?= -static -nostdlib -nostartfiles -lm -lgcc -T $(src_dir)/commo
 RISCV_OBJDUMP ?= $(RISCV_PREFIX)objdump --disassemble-all --disassemble-zeroes --section=.text --section=.text.startup --section=.text.init --section=.data
 RISCV_SIM ?= spike --isa=rv$(XLEN)gc
 
+
 incs  += -I$(src_dir)/../env -I$(src_dir)/common $(addprefix -I$(src_dir)/, $(bmarks))
+litmus_incs += -I$(src_dir)/../env -I$(src_dir)/common 
 objs  :=
+
+define litmus_compile_template
+
+$(1).riscv:  $(wildcard $(src_dir)/common/*) $(wildcard $(src_dir)/litmus_base/*) $(wildcard $(src_dir)/litmus_testcases/$(1)/*)
+	$$(RISCV_GCC) $$(litmus_incs) $$(RISCV_GCC_OPTS) -Ilitmus_testcases/$(1) -o $$@ $(wildcard $(src_dir)/litmus_base/*.c)  $(wildcard $(src_dir)/common/*.c) $(wildcard $(src_dir)/common/*.S) $$(RISCV_LINK_OPTS)
+endef
 
 define compile_template
 $(1).riscv: $(wildcard $(src_dir)/$(1)/*) $(wildcard $(src_dir)/common/*)
 	$$(RISCV_GCC) $$(incs) $$(RISCV_GCC_OPTS) -o $$@ $(wildcard $(src_dir)/$(1)/*.c) $(wildcard $(src_dir)/common/*.c) $(wildcard $(src_dir)/common/*.S) $$(RISCV_LINK_OPTS)
 endef
 
-$(foreach bmark,$(bmarks),$(eval $(call compile_template,$(bmark))))
+# $(foreach bmark,$(bmarks),$(eval $(call compile_template,$(bmark))))
+$(foreach litmus_testcase,$(litmus_tests),$(eval $(call litmus_compile_template,$(litmus_testcase))))
 
 #------------------------------------------------------------
 # Build and run benchmarks on riscv simulator
@@ -62,13 +74,20 @@ bmarks_riscv_bin  = $(addsuffix .riscv,  $(bmarks))
 bmarks_riscv_dump = $(addsuffix .riscv.dump, $(bmarks))
 bmarks_riscv_out  = $(addsuffix .riscv.out,  $(bmarks))
 
+litmus_riscv_bin  = $(addsuffix .riscv,  $(litmus_tests))
+litmus_riscv_dump = $(addsuffix .riscv.dump, $(litmus_tests))
+
 $(bmarks_riscv_dump): %.riscv.dump: %.riscv
+	$(RISCV_OBJDUMP) $< > $@
+
+$(litmus_riscv_dump): %.riscv.dump: %.riscv
 	$(RISCV_OBJDUMP) $< > $@
 
 $(bmarks_riscv_out): %.riscv.out: %.riscv
 	$(RISCV_SIM) $< > $@
 
 riscv: $(bmarks_riscv_dump)
+litmus_riscv: $(litmus_riscv_dump)
 run: $(bmarks_riscv_out)
 
 junk += $(bmarks_riscv_bin) $(bmarks_riscv_dump) $(bmarks_riscv_hex) $(bmarks_riscv_out)
@@ -77,6 +96,11 @@ junk += $(bmarks_riscv_bin) $(bmarks_riscv_dump) $(bmarks_riscv_hex) $(bmarks_ri
 # Default
 
 all: riscv
+
+#------------------------------------------------------------
+# Litmus tests
+
+litmus: litmus_riscv
 
 #------------------------------------------------------------
 # Install

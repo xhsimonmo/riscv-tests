@@ -51,7 +51,8 @@ void log_headstart()
     // Calculate head-start of process 0 relative to this process
     int64_t headstart = (int64_t) test.start_times[i] - 
                         (int64_t) test.start_times[0];
-    headstart += NUM_HEADSTARTS/2;
+    // headstart += NUM_HEADSTARTS/2;
+    headstart = headstart % (NUM_HEADSTARTS/2) + (NUM_HEADSTARTS/2);
     if (headstart >= 0 && headstart < NUM_HEADSTARTS)
       global_log.headstarts[headstart]++;
   }

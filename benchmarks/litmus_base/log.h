@@ -3,7 +3,7 @@
 
 #include "test.h"
 
-// #define SHOW_HEADSTARTS 
+#define SHOW_HEADSTARTS 
 
 typedef struct {
   var_t outcome[LEN_OUTCOME];

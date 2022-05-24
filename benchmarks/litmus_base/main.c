@@ -19,7 +19,7 @@ void thread_entry(int cid, int nc)
 
   // static allocates data in the binary, which is visible to both threads, for head start, hash and share variable LOC
   static char allocated_ram[TOTAL_DATA_SIZE];
-  //printf("RAM data address of thread %u is 0x%x\n!",cid,&allocated_ram);
+  // printf("RAM data address of thread %u is 0x%x\n!",cid,&allocated_ram);
 
   if (cid == 0) {
     // printf("the static ram size is %u \n", sizeof(allocated_ram));
