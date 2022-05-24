@@ -4,7 +4,7 @@
 #define _TESTCASE_H_
 
 #define NUM_PROCESSES 2
-#define NUM_ITERATIONS 300
+#define NUM_ITERATIONS 100
 #define NUM_VARS 2
 #define NUM_LOCS 128
 #define LOC_GRAIN 1
