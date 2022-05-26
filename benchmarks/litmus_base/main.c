@@ -43,8 +43,8 @@ void thread_entry(int cid, int nc)
     log_display();
   }
 
-    barrier(nc);
-    // printf("\n \\\\\\\\\\\\\\\\EXIT THREAD_ENTRY from Hart %u\\\\\\\\\\ \n", cid);
-    exit(0);
+  barrier(nc);
+  // printf("\n \\\\\\\\\\\\\\\\EXIT THREAD_ENTRY from Hart %u\\\\\\\\\\ \n", cid);
+  exit(0);
 
 }

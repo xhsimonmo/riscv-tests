@@ -37,7 +37,7 @@ void test_init(uint32_t* seed, const char* allocated_ram)
   }
 
   // for (int i = 0; i < NUM_PROCESSES; i++)
-    // printf("TEST INIT: test start time[%u]: %u\n",i, test.start_times[i]);
+  //   printf("TEST INIT: test start time[%u]: %u\n",i, test.start_times[i]);
 
   // Set random start delays
   uint32_t max = 0;
