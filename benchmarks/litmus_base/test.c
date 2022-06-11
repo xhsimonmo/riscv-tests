@@ -27,7 +27,7 @@ void test_init(uint32_t* seed, const char* allocated_ram)
       for (int j = 0; j < i; j++)
         if (rs[i] == rs[j]) goto retry;
   }
-  //printf("TEST INIT: LOCS_BASE is 0x%x \n", LOCS_BASE);
+  // printf("TEST INIT: LOCS_BASE is 0x%x \n", LOCS_BASE);
   // Intialise variables
   test.locs = (var_t*) LOCS_BASE;
   for (int i = 0; i < NUM_VARS; i++) {
@@ -45,7 +45,7 @@ void test_init(uint32_t* seed, const char* allocated_ram)
     if (test.start_times[i] > max) max = test.start_times[i];
 
   for (int i = 0; i < NUM_PROCESSES; i++){
-    test.delays[i] = rand_k(seed, test.start_times[i] < max ? 6 : 2);
+    test.delays[i] = rand_k(seed, test.start_times[i] < max ? 10 : 3);
     // printf("TEST INIT: test delay of hart %u is set to be %u\n",i, test.delays[i]);
     }
 }

@@ -104,6 +104,9 @@ void log_update()
 {
   log_headstart();
   log_add_outcome();
+  // for (int i = 0; i < NUM_PROCESSES; i++){
+  //   printf("TEST INIT: test start time[%u]: %u\n",i, test.start_times[i]);}
+  // log_display_outcome();
 }
 
 // ==================
