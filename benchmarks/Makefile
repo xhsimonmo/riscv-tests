@@ -17,24 +17,26 @@ instbasedir = $(UCB_VLSI_HOME)/install
 # Sources
 #--------------------------------------------------------------------
 
-# bmarks = \
-# 	median \
-# 	qsort \
-# 	rsort \
-# 	towers \
-# 	vvadd \
-# 	multiply \
-# 	mm \
-# 	dhrystone \
-# 	spmv \
-# 	mt-vvadd \
-# 	mt-matmul \
-# 	pmp \
+bmarks = \
+	median \
+	qsort \
+	rsort \
+	towers \
+	vvadd \
+	multiply \
+	mm \
+	dhrystone \
+	spmv \
+	mt-vvadd \
+	mt-matmul \
+	pmp \
 
-litmus_tests = \
-	2+2W+sync+po.litmus\
-	LRSC-Swap.litmus\
-	SB.litmus \
+# litmus_tests = \
+# 	2+2W+sync+po.litmus\
+# 	LRSC-Swap.litmus\
+# 	SB.litmus \
+
+litmus_tests = SB.litmus
 
 #--------------------------------------------------------------------
 # Build rules
