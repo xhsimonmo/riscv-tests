@@ -31,12 +31,16 @@ bmarks = \
 	mt-matmul \
 	pmp \
 
-# litmus_tests = \
-# 	2+2W+sync+po.litmus\
-# 	LRSC-Swap.litmus\
-# 	SB.litmus \
+litmus_tests = \
+	MP.litmus\
+	LB.litmus\
+	SB.litmus \
+	SB_forward.litmus \
+	SB-fence.litmus \
+	LB-fence.litmus \
+	MP-fence.litmus \
 
-litmus_tests = SB.litmus
+# litmus_tests = SB.litmus
 
 #--------------------------------------------------------------------
 # Build rules

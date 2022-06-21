@@ -20,7 +20,7 @@ void thread_entry(int cid, int nc)
   // printf("RAM data address of thread %u is 0x%x\n!",cid,&allocated_ram);
 
   if (cid == 0) {
-    printf("the static ram size is %u \n", sizeof(allocated_ram));
+    // printf("the static ram size is %u \n", sizeof(allocated_ram));
     log_init(allocated_ram);
   }
   barrier(nc);
@@ -28,10 +28,10 @@ void thread_entry(int cid, int nc)
   uint32_t seed = 0;
 
   for (int i = 0; i < NUM_ITERATIONS; i++) {
-    printf("TEST RUN %d of litmus. \n", i);
+    // printf("TEST RUN %d of litmus. \n", i);
     if (cid == 0) test_init(&seed, allocated_ram);
     barrier(nc);
-    printf("TEST RUN %d of litmus test body. \n", i);
+    // printf("TEST RUN %d of litmus test body. \n", i);
     test_body(cid);
     barrier(nc);
     if (cid == 0) log_update();

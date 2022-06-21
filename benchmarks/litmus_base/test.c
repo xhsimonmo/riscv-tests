@@ -20,6 +20,7 @@ void test_init(uint32_t* seed, const char* allocated_ram)
   // Randomize variable locations
   uint32_t rs[NUM_VARS];
   // LOCS region starts after headstart and hash
+  // printf("TEST init \n");
   const char* LOCS_BASE = allocated_ram + NUM_HEADSTARTS*sizeof(headstart_t) + HASH_TABLE_SIZE*sizeof(log_entry_t);
   for (int i = 0; i < NUM_VARS; i++) {
     retry:
